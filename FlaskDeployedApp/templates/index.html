@@ -1,0 +1,166 @@
+<html>
+{% extends 'base.html' %}
+{% block pagetitle %}
+AI Engine
+{% endblock pagetitle %}
+
+{% block body %}
+<div>
+    <div class="container">
+        <div class="row mb-5 text-center text-white">
+            <div class="col-lg-10 mx-auto">
+                <h2 class="display-4" style="padding-top: 2%; font-weight: 400; color: rgb(15, 23, 42);"><b>Leaf Guard Model</b></h2>
+                <p class="lead" style="font-weight: 500; color: black;">This AI Engine Will Help You To Detect Disease</p>
+            </div>
+        </div>
+        
+        <div class="row text-black">
+            <div class="col mx-auto">
+                <div class="p-5 bg-white shadow rounded-lg" style="height: 95%;">
+                    <h5><b>Why is it necessary to detect disease in plants?</b></h5>
+                    <p>Plant diseases affect the growth of their respective species. Without proper identification and diagnosis, disease control measures can be ineffective and costly.</p>
+                </div>
+            </div>
+            
+            <div class="col mx-auto">
+                <div class="p-5 bg-white shadow rounded-lg" style="height: 95%;">
+                    <div id="camera-container" style="display: none;">
+                        <video id="camera-feed" width="320" height="240" autoplay></video>
+                        <button type="button" id="capture-btn">Capture Photo</button>
+                    </div>
+
+                    <div id="preview-container" style="display: none;">
+                        <img id="preview" alt="Camera Photo Preview" style="max-width: 100%;" />
+                    </div>
+
+                    <form id="upload-form" action="/submit" method="POST" enctype="multipart/form-data">
+                        <div class="custom-file overflow-hidden mb-4">
+                            <input type="file" id="actual-btn" hidden name="image" />
+                            <label for="actual-btn">Choose File</label>
+                            <label id="camera-btn">Open Camera</label>
+                            <br />
+                            <span id="file-chosen">No file chosen</span>
+                        </div>
+                        <h6 class="text-center mb-4 text-muted">Simply upload your plant's leaf image and see the magic of AI.</h6>
+                        <center>
+                            <button type="submit" class="btn" id="submit-btn">Submit</button>
+                        </center>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col mx-auto">
+                <div class="p-5 bg-white shadow rounded-lg" style="height: 95%;">
+                    <h5><b>Prevent Plant Disease by following these steps:</b></h5>
+                    <ol>
+                        <li>Follow Good Sanitation Practices.</li>
+                        <li>Fertilize to Keep Your Plants Healthy.</li>
+                        <li>Inspect Plants for Diseases Before Bringing Them Home.</li>
+                        <li>Rotate Crops in Your Vegetable Garden.</li>
+                        <li>Ensure Good Air Circulation.</li>
+                        <li>Remove Diseased Stems and Foliage.</li>
+                    </ol>
+                    <a target="_blank" href="https://www.thespruce.com/prevent-plant-diseases-in-your-garden-2539511" class="mx-2">
+                        <button type="button" class="btn" id="submit-btn">More info</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const actualBtn = document.getElementById('actual-btn');
+    const fileChosen = document.getElementById('file-chosen');
+    const preview = document.getElementById('preview');
+    const previewContainer = document.getElementById('preview-container');
+    const form = document.getElementById('upload-form');
+    let capturedFile = null;
+
+    actualBtn.addEventListener('change', function () {
+        if (this.files && this.files[0]) {
+            fileChosen.textContent = this.files[0].name;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                previewContainer.style.display = 'block';
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    document.getElementById('camera-btn').addEventListener('click', function () {
+        document.getElementById('camera-container').style.display = 'block';
+        startCamera();
+    });
+
+    async function startCamera() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            document.getElementById('camera-feed').srcObject = stream;
+        } catch (err) {
+            console.error('Error accessing the camera:', err);
+        }
+    }
+
+    document.getElementById('capture-btn').addEventListener('click', function () {
+        const video = document.getElementById('camera-feed');
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const dataUrl = canvas.toDataURL('image/jpeg');
+        capturedFile = dataURLtoFile(dataUrl, 'captured_image.jpg');
+
+        fileChosen.textContent = capturedFile.name;
+        preview.src = dataUrl;
+        previewContainer.style.display = 'block';
+        stopCamera();
+        document.getElementById('camera-container').style.display = 'none';
+    });
+
+    function dataURLtoFile(dataUrl, filename) {
+        const arr = dataUrl.split(',');
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+    }
+
+    function stopCamera() {
+        const video = document.getElementById('camera-feed');
+        const stream = video.srcObject;
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            video.srcObject = null;
+        }
+    }
+
+    form.addEventListener('submit', function (event) {
+        if (capturedFile) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            formData.append('image', capturedFile);
+
+            fetch('/submit', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.text())
+              .then(data => {
+                  document.open();
+                  document.write(data);
+                  document.close();
+              })
+              .catch(error => console.error('Error:', error));
+        }
+    });
+</script>
+
+{% endblock body %}
+</html>

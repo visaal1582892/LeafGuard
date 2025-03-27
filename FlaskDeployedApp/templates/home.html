@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+Plant Disease Detection
+{% endblock pagetitle %}
+{% block body %}
+<style>
+  body{
+    overflow-x: hidden;
+  }
+  @media only screen and (max-width: 830px) {
+    .laptop{
+      display: none;
+    }
+  }
+  @media (min-width:830px) and (max-width: 1536px){
+    .mobile{
+      display: none;
+    }
+  }
+
+  blockquote{
+    font-weight: bold;
+    font-size: larger;
+    display: block;
+    margin-top: 200px;
+    text-align: center;
+    width: 80%;
+  }
+</style>
+
+<!-- <center class="laptop">
+    <a href="/index">
+    <button class = "bttn-pill bttn-lg btn-success"><b style="color: black;">AI Engine</b></button>
+</a>
+</center> -->
+<!-- Fruits Carousel -->
+<style>
+  /* Custom styles for the carousels */
+  .carousel-item img {
+    border-radius: 0.5rem;
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+  }
+  .carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+  }
+  h2.section-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .carousel-item img {
+  height: 400px;          /* Set a fixed height for all images */
+  width: 100%;            /* Ensure images span the full width */
+  object-fit: cover; 
+  }
+  
+  .corouselsContainer{
+    width: 90%;
+    display: flex;
+  }
+
+  .corouselContainer{
+    width: 40%;
+  }
+  
+  @media screen and (max-width: 900px) {
+    .corouselsContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .carousel-item img {
+    border-radius: 0.5rem;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .corouselContainer{
+    width: 70%;
+  }
+
+  }
+
+  @media screen and (max-width: 700px) {
+    
+  }
+</style>
+<!-- Google Fonts: Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light">
+<br>
+<blockquote>This website helps identify and guide you through diseases affecting the displayed fruits and vegetables</blockquote>
+
+<div class="corouselsContainer">
+  <!-- Fruits Carousel -->
+<div class="container my-5 corouselContainer" >
+  <h2 class="text-center section-title">Fruits</h2>
+  <div id="fruitsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#fruitsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Apple"></button>
+      <button type="button" data-bs-target="#fruitsCarousel" data-bs-slide-to="1" aria-label="Blueberry"></button>
+      <button type="button" data-bs-target="#fruitsCarousel" data-bs-slide-to="2" aria-label="Cherry"></button>
+      <button type="button" data-bs-target="#fruitsCarousel" data-bs-slide-to="3" aria-label="Grape"></button>
+      <button type="button" data-bs-target="#fruitsCarousel" data-bs-slide-to="4" aria-label="Orange"></button>
+      <button type="button" data-bs-target="#fruitsCarousel" data-bs-slide-to="5" aria-label="Peach"></button>
+      <button type="button" data-bs-target="#fruitsCarousel" data-bs-slide-to="6" aria-label="Raspberry"></button>
+      <button type="button" data-bs-target="#fruitsCarousel" data-bs-slide-to="7" aria-label="Squash"></button>
+      <button type="button" data-bs-target="#fruitsCarousel" data-bs-slide-to="8" aria-label="Strawberry"></button>
+
+    </div>
+    <!-- Carousel items -->
+    <div class="carousel-inner shadow-sm">
+      <div class="carousel-item active">
+        <img src="https://post.healthline.com/wp-content/uploads/2020/09/Do_Apples_Affect_Diabetes_and_Blood_Sugar_Levels-732x549-thumbnail-1-732x549.jpg" class="d-block w-100" alt="Apple" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Apple</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://www.supermarketperimeter.com/ext/resources/0430-blueberries.png?t=1588260305&width=1080" class="d-block w-100" alt="Blueberry" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Blueberry</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/slideshows/health_benefits_of_cherries_slideshow/1800x1200_health_benefits_of_cherries_slideshow.jpg" class="d-block w-100" alt="Cherry" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Cherry</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://i.ndtvimg.com/i/2015-09/grapes_625x350_61443376353.jpg" class="d-block w-100" alt="Grape"/>
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Grape</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://media.istockphoto.com/id/907999120/photo/picked-orange-fruits.jpg?s=612x612&w=0&k=20&c=jPpjFtvoZcok3tH9eyWdLoGjkZMHQNF-dTA6V2HaVQA=" class="d-block w-100" alt="Orange" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Orange</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/the_health_benefits_of_peaches_slideshow/thinkstock_rf_peaches.jpg?resize=650px:*" class="d-block w-100" alt="Peach" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Peach</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/326/326272/raspberries-with-ketones-in-a-bowl.jpg?w=1155&h=1541" class="d-block w-100" alt="Raspberry" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Raspberry</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://post.healthline.com/wp-content/uploads/2020/08/squash-fruit-or-vegetable-732x549-thumbnail-732x549.jpg" class="d-block w-100" alt="Squash" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Squash</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://images.indianexpress.com/2020/02/strawberry-1200.jpg" class="d-block w-100" alt="Strawberry" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Strawberry</h5>
+        </div>
+      </div>
+    </div>
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#fruitsCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#fruitsCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<!-- Vegetables Carousel -->
+<div class="container my-5" >
+  <h2 class="text-center section-title">Vegetables</h2>
+  <div id="vegetablesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#vegetablesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Corn"></button>
+      <button type="button" data-bs-target="#vegetablesCarousel" data-bs-slide-to="1" aria-label="Potato"></button>
+      <button type="button" data-bs-target="#vegetablesCarousel" data-bs-slide-to="2" aria-label="Pepper Bell"></button>
+      <button type="button" data-bs-target="#vegetablesCarousel" data-bs-slide-to="3" aria-label="Tomato"></button>
+      <button type="button" data-bs-target="#vegetablesCarousel" data-bs-slide-to="4" aria-label="Soybean"></button>
+    </div>
+    <!-- Carousel items -->
+    <div class="carousel-inner shadow-sm">
+      <div class="carousel-item active">
+        <img src="https://media.istockphoto.com/id/1061097354/photo/the-corn-plant-in-the-field.jpg?s=612x612&w=0&k=20&c=NEEzE5il-up8g7NZj_7HJUpyVep18zBRfhnMZ5laLiQ=" class="d-block w-100" alt="Corn" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Corn</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://m.economictimes.com/thumb/height-450,width-600,imgsize-111140,msid-72862126/potato-getty.jpg" class="d-block w-100" alt="Potato" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Potato</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://images.unsplash.com/photo-1601648764658-cf37e8c89b70?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVsbCUyMHBlcHBlcnxlbnwwfHwwfHx8MA%3D%3D" class="d-block w-100" alt="Pepper Bell" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Pepper Bell</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://images-prod.healthline.com/hlcmsresource/images/AN_images/tomatoes-1296x728-feature.jpg" class="d-block w-100" alt="Tomato" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Tomato</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://m.economictimes.com/thumb/msid-66988154,width-1200,height-900,resizemode-4,imgsize-211276/soyabean-agencies.jpg" class="d-block w-100" alt="Soybean" />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Soybean</h5>
+        </div>
+      </div>
+    </div>
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#vegetablesCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#vegetablesCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+{% endblock body %}

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bttn.css/0.2.4/bttn.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <title> {% block pagetitle %}
+
+        {% endblock pagetitle %}</title>
+    <style>
+        .bg {
+
+            background-image: url("images/background.jpeg");
+
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .file-upload input[type='file'] {
+            display: none;
+        }
+
+        body {
+            background-image: radial-gradient(rgb(249, 206, 138),rgb(251, 182, 54));
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .rounded-lg {
+            border-radius: 1rem;
+        }
+
+        .custom-file-label.rounded-pill {
+            border-radius: 50rem;
+        }
+
+        .custom-file-label.rounded-pill::after {
+            border-radius: 0 50rem 50rem 0;
+        }
+
+        label,#capture-btn,#submit-btn {
+            background-color: orangered;
+            color: rgb(15, 23, 42);
+            padding: 0.5rem;
+            font-family: sans-serif;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-weight: 700;
+        }
+
+        #file-chosen {
+            margin-left: 0.3rem;
+            font-family: sans-serif;
+        }
+        header{
+            width: 100%;
+            height: 15vh;
+            background-color: rgb(15, 23, 42);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .navitem{
+            text-decoration: none;
+            color: black;
+            font-size: 150%;
+            font-weight: 500;
+            margin: 3px 5%;
+            text-align: center;
+            margin: 0;
+            border-collapse: collapse;
+            height: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .navitem:hover{
+            color: orangered;
+        }
+        h1{
+            /* background-color: black; */
+            text-align: center;
+            font-size: 300%;
+            margin: 0 2%;
+        }
+        .menu{
+            justify-self: flex-end;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            right: 3%;
+        }
+        .menuicon{
+            width: 100%;
+            height: 100%;
+        }
+        .menuicon:hover,.menuicon:active{
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+        }
+        .menublock{
+            position: absolute;
+            background-color: rgb(246, 229, 198);
+            right:20%;
+            top: 130%;
+            display: none;
+            flex-direction: column;
+            width: 500%;
+            height: 400%;
+            border-radius: 10%;
+            border: 2px solid orangered;
+            z-index: 500;
+        }
+
+        .shield{
+            width: 70px;
+            height: 70px;
+        }
+
+        @media screen and (max-width: 700px) {
+            .shield{
+                display: none;
+            }
+            .heading{
+                font-size: 200%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="https://cdn-icons-png.flaticon.com/128/9645/9645004.png" alt="shield" class="shield">
+        <h1 class="heading" style="color: rgb(249, 76, 13);">Leaf Guard</h1>
+        <img src="https://cdn-icons-png.flaticon.com/128/9645/9645004.png" alt="shield" class="shield">
+        <div class="menu">
+            <img src="https://cdn-icons-png.flaticon.com/128/12087/12087772.png" alt="menu" class="menuicon">
+            <div class="menublock">
+                <a class="navitem" href="/">Home</a>
+                <a class="navitem" href="/index">Model</a>
+                <a class="navitem" href="/market">Supplements</a>
+            </div>
+        </div>
+    </header>
+    {% block body %}
+
+    {% endblock body %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let menuicon=document.getElementsByClassName("menuicon");
+        let menublock=document.querySelector(".menublock");
+        let toggleBlock=()=>{
+            menublock.style.display=(menublock.style.display=="none")?"flex":"none";
+        }
+        menuicon[0].addEventListener("click",toggleBlock);
+    </script>
+</body>
+</html>
