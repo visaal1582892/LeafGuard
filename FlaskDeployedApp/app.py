@@ -33,7 +33,10 @@ def prediction(image_path):
     input_data = input_data.view((-1, 3, 224, 224))
     output = model(input_data)
     output = output.detach().numpy()
+    print(output)
     index = np.argmax(output)
+    print(index)
+    print(output[0][index])
     return index
 
 @app.route('/')
