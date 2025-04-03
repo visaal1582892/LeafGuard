@@ -37,7 +37,8 @@ def prediction(image_path):
     index = np.argmax(output)
     print(index)
     print(output[0][index])
-    return index
+    return index if output[0][index]>10 and output[0][index]<31 else -1
+    # return index
 
 @app.route('/')
 def home_page():
@@ -83,6 +84,9 @@ def submit():
             print("Uploaded file saved at:", filename)
 
         pred = prediction(filename)
+        if pred==-1:
+            print("wrong")
+            pred=4
         title = disease_info['disease_name'][pred]
         description = disease_info['description'][pred]
         prevent = disease_info['Possible Steps'][pred]
