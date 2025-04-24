@@ -37,7 +37,8 @@ def prediction(image_path):
     index = np.argmax(output)
     print(index)
     print(output[0][index])
-    return index if output[0][index]>10 and output[0][index]<31 else -1
+    print(disease_info['disease_name'][index])
+    return index if output[0][index]>11 and output[0][index]<31 else -1
     # return index
 
 @app.route('/')
@@ -94,7 +95,6 @@ def submit():
         supplement_name = supplement_info['supplement name'][pred]
         supplement_image_url = supplement_info['supplement image'][pred]
         supplement_buy_link = supplement_info['buy link'][pred]
-
         return render_template(
             'submit.html',
             title=title,
@@ -107,8 +107,26 @@ def submit():
             buy_link=supplement_buy_link
         )
     except Exception as e:
-        print("Exception:", e)
-        return {"error": str(e)}, 500
+        print(f"error: {e}")
+        pred=4
+        title = disease_info['disease_name'][pred]
+        description = disease_info['description'][pred]
+        prevent = disease_info['Possible Steps'][pred]
+        image_url = disease_info['image_url'][pred]
+        supplement_name = supplement_info['supplement name'][pred]
+        supplement_image_url = supplement_info['supplement image'][pred]
+        supplement_buy_link = supplement_info['buy link'][pred]
+        return render_template(
+            'submit.html',
+            title=title,
+            desc=description,
+            prevent=prevent,
+            image_url=image_url,
+            pred=pred,
+            sname=supplement_name,
+            simage=supplement_image_url,
+            buy_link=supplement_buy_link
+        )
 
 
 
